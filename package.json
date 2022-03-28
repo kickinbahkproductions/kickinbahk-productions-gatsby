@@ -15,6 +15,7 @@
     "gatsby-plugin-resolve-src": "^2.1.0",
     "gatsby-plugin-sharp": "^4.10.2",
     "gatsby-source-filesystem": "^4.10.1",
+    "gatsby-source-sanity": "^7.3.2",
     "gatsby-transformer-sharp": "^4.10.0",
     "glider-js": "^1.7.7",
     "postcss": "^8.4.12",

@@ -7,7 +7,7 @@ module.exports = {
     title: `kickinbahk Productions`,
     description: `I help brick and mortar business owners bust through your ceiling and take advantage of the marketplace beyond your 4 walls by expanding into ecommerce.`,
     author: `Josiah Mory`,
-    siteUrl: `kickinbahkproductions.com`,
+    siteUrl: `https://kickinbahkproductions.com`,
   },
   plugins: [
     `gatsby-plugin-postcss`,
@@ -25,7 +25,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`,
+        path: `${__dirname}/src/assets/images`,
       },
     },
     `gatsby-transformer-sharp`,
@@ -42,6 +42,17 @@ module.exports = {
         theme_color: `#6c63FF`,
         display: `minimal-ui`,
         icon: `src/assets/images/favicon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: `gatsby-source-sanity`,
+      options: {
+        projectId: process.env.SANITY_PROJECT_ID,
+        dataset: process.env.SANITY_DATASET,
+        token: process.env.SANITY_TOKEN,
+        // If the Sanity GraphQL API was deployed using `--tag <name>`,
+        // use `graphqlTag` to specify the tag name. Defaults to `default`.
+        graphqlTag: "default",
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
