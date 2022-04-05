@@ -1,18 +1,12 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
-import * as React from "react"
+import React, { useEffect } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import sal from "sal.js"
 
 import Header from "./header"
-import "./layout.css"
+import Footer from "./footer"
 
-const Layout = ({ children }) => {
+const Layout = ({ children, menus }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -23,33 +17,28 @@ const Layout = ({ children }) => {
     }
   `)
 
+  // Initialize scroll animations
+  useEffect(() => {
+    sal()
+  }, [])
+
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `2rem`,
-          }}
-        >
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
-    </>
+    <div className="wrapper overflow-hidden">
+      <h1 className="hidden">{data.site.siteMetadata.title}</h1>
+      <Header menus={menus} />
+      <div>{children}</div>
+      <Footer menus={menus} />
+    </div>
   )
+}
+
+Layout.defaultProps = {
+  menus: null,
 }
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  menus: PropTypes.any,
 }
 
 export default Layout
